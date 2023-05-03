@@ -30,7 +30,8 @@ const Nav = () => {
         </div>
         {user ? (
           <div className="search-container">
-            {window.location.href === "http://localhost:3000/my-blogs" ? (
+            {window.location.href ===
+            "https://ctd-final.netlify.app/my-blogs" ? (
               <Link onClick={handleAddBlog} className="my-blogs" to="/my-blogs">
                 Add Blog
               </Link>

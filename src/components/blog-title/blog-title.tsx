@@ -26,7 +26,7 @@ const BlogTitle: React.FC = (): JSX.Element => {
   useEffect(() => {
     const getData = async () => {
       let data;
-      location === "http://localhost:3000/my-blogs"
+      location === "https://ctd-final.netlify.app/my-blogs"
         ? (data = await axios.get(`${DOMAIN}/blogs/my-blogs`, {
             headers: { authorization: `Bearer ${token}` },
           }))
@@ -40,7 +40,7 @@ const BlogTitle: React.FC = (): JSX.Element => {
     e.preventDefault();
     const getData = async () => {
       let data;
-      window.location.href === "http://localhost:3000/my-blogs"
+      window.location.href === "https://ctd-final.netlify.app/my-blogs"
         ? (data = await axios.get(`${DOMAIN}/blogs/my-blogs/?title=${search}`, {
             headers: { authorization: `Bearer ${token}` },
           }))
@@ -56,7 +56,7 @@ const BlogTitle: React.FC = (): JSX.Element => {
     e.preventDefault();
     if (page > 1) {
       let data;
-      window.location.href === "http://localhost:3000/my-blogs"
+      window.location.href === "https://ctd-final.netlify.app/my-blogs"
         ? (data = await axios.get(
             `${DOMAIN}/blogs/my-blogs/?page=${page - 1}`,
             {
@@ -72,7 +72,7 @@ const BlogTitle: React.FC = (): JSX.Element => {
   const nextPage = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     console.log(page);
     let data;
-    window.location.href === "http://localhost:3000/my-blogs"
+    window.location.href === "https://ctd-final.netlify.app/my-blogs"
       ? (data = await axios.get(`${DOMAIN}/blogs/my-blogs/?page=${page + 1}`, {
           headers: { authorization: `Bearer ${token}` },
         }))

@@ -41,10 +41,10 @@ const BlogTitle: React.FC = (): JSX.Element => {
     const getData = async () => {
       let data;
       window.location.href === "https://ctd-final.netlify.app/my-blogs"
-        ? (data = await axios.get(`${DOMAIN}/blogs/my-blogs/?title=${search}`, {
+        ? (data = await axios.get(`${DOMAIN}/blogs/my-blogs?title=${search}`, {
             headers: { authorization: `Bearer ${token}` },
           }))
-        : (data = await axios.get(`${DOMAIN}/blogs/?title=${search}`));
+        : (data = await axios.get(`${DOMAIN}/blogs?title=${search}`));
       setData(data?.data?.blogs);
     };
     getData();
@@ -58,12 +58,12 @@ const BlogTitle: React.FC = (): JSX.Element => {
       let data;
       window.location.href === "https://ctd-final.netlify.app/my-blogs"
         ? (data = await axios.get(
-            `${DOMAIN}/blogs/my-blogs/?page=${page - 1}`,
+            `${DOMAIN}/blogs/my-blogs?page=${page - 1}`,
             {
               headers: { authorization: `Bearer ${token}` },
             }
           ))
-        : (data = await axios.get(`${DOMAIN}/blogs/?page=${page - 1}`));
+        : (data = await axios.get(`${DOMAIN}/blogs?page=${page - 1}`));
       console.log(data);
       setPage(page - 1);
       setData(data?.data?.blogs);
@@ -73,10 +73,10 @@ const BlogTitle: React.FC = (): JSX.Element => {
     console.log(page);
     let data;
     window.location.href === "https://ctd-final.netlify.app/my-blogs"
-      ? (data = await axios.get(`${DOMAIN}/blogs/my-blogs/?page=${page + 1}`, {
+      ? (data = await axios.get(`${DOMAIN}/blogs/my-blogs?page=${page + 1}`, {
           headers: { authorization: `Bearer ${token}` },
         }))
-      : (data = await axios.get(`${DOMAIN}/blogs/?page=${page + 1}`));
+      : (data = await axios.get(`${DOMAIN}/blogs?page=${page + 1}`));
     if (data.data.blogs.length === 0) {
       setPage(1);
     } else {

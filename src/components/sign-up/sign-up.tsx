@@ -15,19 +15,32 @@ function SignUpForm() {
 
   const handleSignUp = async (e: any) => {
     e.preventDefault();
-    setOpenLoader(true);
-    setHideForm(false);
+    try {
+      setOpenLoader(true);
+      setHideForm(false);
 
-    const user = await axios.post(`${DOMAIN}/users/sign-up`, {
-      name,
-      email,
-      password,
-    });
-    localStorage.setItem("token", user.data.token);
-    localStorage.setItem("user", JSON.stringify(user.data.user));
-    const token = localStorage.getItem("token");
-    if (token) {
-      navigate("/");
+      const user = await axios.post(`${DOMAIN}/users/sign-up`, {
+        name,
+        email,
+        password,
+      });
+      localStorage.setItem("token", user.data.token);
+      localStorage.setItem("user", JSON.stringify(user.data.user));
+      const token = localStorage.getItem("token");
+      if (token) {
+        navigate("/");
+      }
+    } catch (err: any) {
+      if (
+        err?.response.data.message.message ===
+        "User validation failed: email: please use a valid email address"
+      ) {
+        setOpenLoader(false);
+        setHideForm(true);
+        alert(
+          "User validation failed: email: please use a valid email address"
+        );
+      }
     }
   };
 

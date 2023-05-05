@@ -12,18 +12,29 @@ const Login = () => {
   const [hideForm, setHideForm] = useState<boolean>(true);
   const navigate = useNavigate();
   const handleLogin = async (e: any) => {
-    e.preventDefault();
-    setOpenLoader(true);
-    setHideForm(false);
+    try {
+      e.preventDefault();
+      setOpenLoader(true);
+      setHideForm(false);
 
-    const user = await axios.post(`${DOMAIN}/users/login`, { email, password });
+      const user = await axios.post(`${DOMAIN}/users/login`, {
+        email,
+        password,
+      });
 
-    localStorage.setItem("token", user.data.token);
-    localStorage.setItem("user", JSON.stringify(user.data.user));
+      localStorage.setItem("token", user.data.token);
+      localStorage.setItem("user", JSON.stringify(user.data.user));
 
-    const token = localStorage.getItem("token");
-    if (token) {
-      navigate("/");
+      const token = localStorage.getItem("token");
+      if (token) {
+        navigate("/");
+      }
+    } catch (err: any) {
+      if (err?.response.data.message === "wrong email or password Try again") {
+        setOpenLoader(false);
+        setHideForm(true);
+        alert("wrong email or password Try again");
+      }
     }
   };
 
